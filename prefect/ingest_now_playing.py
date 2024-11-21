@@ -37,7 +37,7 @@ def api_to_csv():
 def load_csv_to_bigquery():
     api_to_csv()
 
-    gcp_credentials =  GcpCredentials.load("gcp-creds")
+    gcp_credentials = GcpCredentials.load("gcp-creds")
     client = gcp_credentials.get_bigquery_client()
     client.create_dataset("movie", exists_ok=True)
 
@@ -72,10 +72,9 @@ def load_csv_to_bigquery():
         dataset="movie",
         table="now_playing",
         path="./prefect/data/nowplaying.csv",
-        gcp_credentials=GcpCredentials.load("gcp-creds")
+        gcp_credentials=gcp_credentials
     )
     return result
-
 
 if __name__ == "__main__":
     load_csv_to_bigquery()
